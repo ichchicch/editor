@@ -73,18 +73,21 @@
       border-left: 4px solid #a050f5;
       margin-bottom: 10px;
     }
-    .premium-benefits {
-      background: #2c1f3a;
-      padding: 15px;
-      margin-top: 15px;
-      border-radius: 10px;
-      display: none;
-    }
     footer {
       text-align: center;
       padding: 20px;
       font-size: 14px;
       background: #1a1a26;
+    }
+    .premium-button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background-color: #b366ff;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -101,13 +104,10 @@
       <p>🎬 1 эдит — 10 000 сум</p>
       <p>🔥 2 эдита — 15 000 сум</p>
       <p>⚡ Срочный — +5 000 сум</p>
+      <p>💎 Премиум (с водяным знаком) — 10 000 сум</p>
       <p style="margin-top: 20px; font-weight: bold;">Оплата через Telegram после обсуждения</p>
-      <button onclick="togglePremium()">Плюсы премиума 💎</button>
-      <div id="premiumInfo" class="premium-benefits">
-        <p>✅ Водяной знак с вашим именем</p>
-        <p>🚀 Приоритетное выполнение заказа</p>
-        <p>🎨 Больше эффектов и качество Full HD</p>
-        <p>⚡ Быстрая доставка</p>
+      <div class="premium-button" onclick="alert('Премиум включает: водяной знак с вашим именем или названием канала. Цена — 10 000 сум.')">
+        Плюсы Премиума
       </div>
     </div>
 
@@ -115,7 +115,8 @@
       <h2>📥 Заказать эдит:</h2>
       <form onsubmit="redirectToTelegram(); return false;">
         <input type="text" id="name" placeholder="Ваше имя" required />
-        <textarea id="desc" rows="4" placeholder="Кого хотите в эдит (например, Месси, Роналду)..." required></textarea>
+        <textarea id="desc" rows="3" placeholder="Описание эдита..." required></textarea>
+        <textarea id="music" rows="2" placeholder="Желаемая музыка (название или ссылка)" required></textarea>
         <button type="submit">Отправить заявку</button>
       </form>
     </div>
@@ -148,18 +149,15 @@
     function redirectToTelegram() {
       const name = document.getElementById("name").value;
       const desc = document.getElementById("desc").value;
-      const text = `Привет! Меня зовут ${name}, хочу эдит: ${desc}`;
+      const music = document.getElementById("music").value;
+      const text = `Привет! Меня зовут ${name}, хочу эдит:\n📝 Описание: ${desc}\n🎵 Музыка: ${music}`;
       const encoded = encodeURIComponent(text);
       window.location.href = `https://t.me/editor052?text=${encoded}`;
-    }
-
-    function togglePremium() {
-      const premium = document.getElementById("premiumInfo");
-      premium.style.display = premium.style.display === "none" ? "block" : "none";
     }
   </script>
 </body>
 </html>
+
 
 
 
