@@ -22,6 +22,8 @@
       position: absolute;
       top: 10px;
       right: 20px;
+      cursor: pointer;
+      font-weight: bold;
     }
     .profile {
       position: absolute;
@@ -74,52 +76,45 @@
 <body>
   <header>
     <div class="profile" id="profile-info"></div>
-    <h1>RB Sports Edits</h1>
-    <div class="lang-switch">RU | UZ</div>
+    <h1 id="site-title">RB Sports Edits</h1>
+    <div class="lang-switch" onclick="toggleLanguage()" id="lang-switcher">RU | UZ</div>
   </header>
 
   <div class="container">
 
-    <!-- Регистрация -->
     <div class="section" id="register-box">
-      <h2>🔐 Регистрация</h2>
-      <input type="text" id="reg-name" placeholder="Имя" />
-      <input type="password" id="reg-pass" placeholder="Пароль" />
-      <button onclick="register()">Зарегистрироваться</button>
+      <h2 data-ru="🔐 Регистрация" data-uz="🔐 Ro‘yxatdan o‘tish">🔐 Регистрация</h2>
+      <input type="text" id="reg-name" placeholder="Имя / Ism" />
+      <input type="password" id="reg-pass" placeholder="Пароль / Parol" />
+      <button onclick="register()" data-ru="Зарегистрироваться" data-uz="Ro‘yxatdan o‘tish">Зарегистрироваться</button>
     </div>
 
-    <!-- Вход -->
     <div class="section" id="login-box">
-      <h2>🔑 Вход</h2>
-      <input type="text" id="login-name" placeholder="Имя" />
-      <input type="password" id="login-pass" placeholder="Пароль" />
-      <button onclick="login()">Войти</button>
+      <h2 data-ru="🔑 Вход" data-uz="🔑 Kirish">🔑 Вход</h2>
+      <input type="text" id="login-name" placeholder="Имя / Ism" />
+      <input type="password" id="login-pass" placeholder="Пароль / Parol" />
+      <button onclick="login()" data-ru="Войти" data-uz="Kirish">Войти</button>
     </div>
 
-    <!-- Цены -->
     <div class="section">
-      <h2>💰 Цены:</h2>
-      <p>🎬 1 эдит — 10 000 сум</p>
-      <p>🔥 2 эдита — 15 000 сум</p>
-      <p>⚡ Срочный — +5 000 сум</p>
-      <p>💎 Премиум (с водяным знаком) — 10 000 сум</p>
-      <p><strong>Оплата через Telegram после обсуждения</strong></p>
-      <button class="premium-button" onclick="alert('Премиум включает: водяной знак с вашим именем или названием канала. Цена — 10 000 сум.')">
-        Плюсы Премиума
-      </button>
+      <h2 data-ru="💰 Цены:" data-uz="💰 Narxlar:">💰 Цены:</h2>
+      <p data-ru="🎬 1 эдит — 10 000 сум" data-uz="🎬 1 edit — 10 000 so‘m">🎬 1 эдит — 10 000 сум</p>
+      <p data-ru="🔥 2 эдита — 15 000 сум" data-uz="🔥 2 edit — 15 000 so‘m">🔥 2 эдита — 15 000 сум</p>
+      <p data-ru="⚡ Срочный — +5 000 сум" data-uz="⚡ Shoshilinch — +5 000 so‘m">⚡ Срочный — +5 000 сум</p>
+      <p data-ru="💎 Премиум (с водяным знаком) — 10 000 сум" data-uz="💎 Premium (belgi bilan) — 10 000 so‘m">💎 Премиум (с водяным знаком) — 10 000 сум</p>
+      <p data-ru="Оплата через Telegram после обсуждения" data-uz="To‘lov Telegram orqali kelishilganidan keyin">Оплата через Telegram после обсуждения</p>
+      <button class="premium-button" onclick="alertPremium()" data-ru="Плюсы Премиума" data-uz="Premium afzalliklari">Плюсы Премиума</button>
     </div>
 
-    <!-- Заявка -->
     <div class="section" id="order-form" style="display:none;">
-      <h2>📥 Заказать эдит:</h2>
-      <input type="text" id="edit-desc" placeholder="Описание (например: Месси, голы)" />
-      <input type="text" id="edit-music" placeholder="Какую музыку хотите?" />
-      <button onclick="sendToTelegram()">Отправить заявку</button>
+      <h2 data-ru="📥 Заказать эдит:" data-uz="📥 Edit buyurtma berish:">📥 Заказать эдит:</h2>
+      <input type="text" id="edit-desc" placeholder="Описание / Tavsif" />
+      <input type="text" id="edit-music" placeholder="Музыка / Musiqa" />
+      <button onclick="sendToTelegram()" data-ru="Отправить" data-uz="Yuborish">Отправить</button>
     </div>
 
-    <!-- Видео -->
     <div class="section">
-      <h2>🎬 Примеры эдитов:</h2>
+      <h2 data-ru="🎬 Примеры эдитов:" data-uz="🎬 Edit namunalar:">🎬 Примеры эдитов:</h2>
       <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
         <iframe width="300" height="170" src="https://www.youtube.com/embed/XCX8kAc4zj4" allowfullscreen></iframe>
         <iframe width="300" height="170" src="https://www.youtube.com/embed/lCtmTV7pqeY" allowfullscreen></iframe>
@@ -127,17 +122,32 @@
       </div>
     </div>
 
-    <!-- Отзывы -->
     <div class="section">
-      <h2>🗣️ Отзывы:</h2>
-      <p>“Очень крутой эдит, спасибо большое!”</p>
-      <p>“Сделал быстро и красиво, рекомендую!”</p>
-      <p>“Теперь буду заказывать только у тебя!”</p>
+      <h2 data-ru="🗣️ Отзывы:" data-uz="🗣️ Fikrlar:">🗣️ Отзывы:</h2>
+      <p data-ru="“Очень крутой эдит, спасибо большое!”" data-uz="“Zo‘r edit! Katta rahmat!”">“Очень крутой эдит, спасибо большое!”</p>
+      <p data-ru="“Сделал быстро и красиво, рекомендую!”" data-uz="“Tez va chiroyli ishlagan, tavsiya qilaman!”">“Сделал быстро и красиво, рекомендую!”</p>
+      <p data-ru="“Теперь буду заказывать только у тебя!”" data-uz="“Endi faqat sendan buyurtma beraman!”">“Теперь буду заказывать только у тебя!”</p>
     </div>
 
-    <!-- Контакты -->
     <div class="section">
-      <h2>📞 Связь:</h2>
+      <h2 data-ru="📉 Скидка на первый заказ!" data-uz="📉 Birinchi buyurtmaga chegirma!">📉 Скидка на первый заказ!</h2>
+      <p data-ru="Получите 30% скидку на первый эдит — просто напишите об этом в Telegram!" data-uz="Telegramda yozsangiz, birinchi editingizga 30% chegirma olasiz!">Получите 30% скидку на первый эдит — просто напишите об этом в Telegram!</p>
+    </div>
+
+    <div class="section">
+      <h2 data-ru="⭐ Средняя оценка:" data-uz="⭐ O‘rtacha baho:">⭐ Средняя оценка:</h2>
+      <p style="font-size: 24px;">⭐⭐⭐⭐⭐ 4.9 из 5</p>
+    </div>
+
+    <div class="section">
+      <h2 data-ru="❓ Часто задаваемые вопросы" data-uz="❓ Ko‘p so‘raladigan savollar">❓ Часто задаваемые вопросы</h2>
+      <p><strong data-ru="⏱️ Сколько ждать эдит?" data-uz="⏱️ Edit necha kunda tayyor bo‘ladi?">⏱️ Сколько ждать эдит?</strong><br><span data-ru="Обычно 5-6 часов если срочный то 1-2 часа." data-uz="Odatda 5-6 soat, shoshilinchlari — bir necha soatda.">Обычно 1-2 дня, срочные — за несколько часов.</span></p>
+      <p><strong data-ru="🎵 Можно ли выбрать музыку?" data-uz="🎵 Musiqani o‘zim tanlasam bo‘ladimi?">🎵 Можно ли выбрать музыку?</strong><br><span data-ru="Да, напишите в поле при заказе." data-uz="Ha, buyurtma paytida yozishingiz mumkin.">Да, напишите в поле при заказе.</span></p>
+      <p><strong data-ru="💳 Как происходит оплата?" data-uz="💳 To‘lov qanday amalga oshiriladi?">💳 Как происходит оплата?</strong><br><span data-ru="После оформления заявки — в Telegram." data-uz="Buyurtma qilgandan so‘ng — Telegramda.">После оформления заявки — в Telegram.</span></p>
+    </div>
+
+    <div class="section">
+      <h2 data-ru="📞 Связь:" data-uz="📞 Bog‘lanish:">📞 Связь:</h2>
       <p>Telegram: <strong>@editor052</strong></p>
       <p>Телефон: <strong>+998 77 265 66 53</strong></p>
     </div>
@@ -152,8 +162,6 @@
         localStorage.setItem('password', pass);
         alert('Успешная регистрация!');
         showProfile(name);
-      } else {
-        alert('Введите имя и пароль.');
       }
     }
 
@@ -181,14 +189,34 @@
       const name = localStorage.getItem('username');
       const desc = document.getElementById('edit-desc').value;
       const music = document.getElementById('edit-music').value;
-      const text = `Привет! Меня зовут ${name}, хочу эдит:\nОписание: ${desc}\nМузыка: ${music}`;
+      const text = `Привет! Меня зовут ${name}, хочу эдит:
+Описание: ${desc}
+Музыка: ${music}`;
       const url = `https://t.me/editor052?text=${encodeURIComponent(text)}`;
       window.location.href = url;
+    }
+
+    function toggleLanguage() {
+      const lang = localStorage.getItem('lang') === 'uz' ? 'ru' : 'uz';
+      localStorage.setItem('lang', lang);
+      document.querySelectorAll('[data-ru]').forEach(el => {
+        el.innerText = el.getAttribute(`data-${lang}`);
+      });
+    }
+
+    function alertPremium() {
+      const lang = localStorage.getItem('lang') || 'ru';
+      if (lang === 'uz') {
+        alert("Premiumda sizning nomingiz bilan belgilar bo‘ladi. Narxi: 10 000 so‘m.");
+      } else {
+        alert("Премиум включает: водяной знак с вашим именем или названием канала. Цена — 10 000 сум.");
+      }
     }
 
     window.onload = () => {
       const name = localStorage.getItem('username');
       if (name) showProfile(name);
+      toggleLanguage();
     };
   </script>
 </body>
